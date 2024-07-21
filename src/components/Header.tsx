@@ -3,7 +3,7 @@ import Logo from "../assets/estructura-de-datos.png";
 
 export default function Header() {
   return (
-    <header className="flex p-4 bg-blue-700">
+    <header className="flex py-2 px-6 bg-monsoon-900">
       <Link to="/">
         {" "}
         <img src={Logo} alt="logo" />
