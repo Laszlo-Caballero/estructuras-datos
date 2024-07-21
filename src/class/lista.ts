@@ -15,7 +15,7 @@ export class ListaSimple {
     }
   }
 
-  agregarInicio(nuevo: Nodo) {
+  AgregarInicio(nuevo: Nodo) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -25,7 +25,7 @@ export class ListaSimple {
     this.cant++;
   }
 
-  agregarFinal(nuevo: Nodo) {
+  AgregarFinal(nuevo: Nodo) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -36,6 +36,28 @@ export class ListaSimple {
       inicio.sgte = nuevo;
     }
     this.cant++;
+  }
+
+  EliminarNodo(dato: string) {
+    if (this.inicio?.dato == dato) {
+      this.inicio = this.inicio.sgte;
+      return true;
+    }
+
+    let anterior = this.inicio;
+    let actual = this.inicio?.sgte;
+
+    while (actual != null && actual.dato != dato) {
+      anterior = actual;
+      actual = actual.sgte;
+    }
+
+    if (actual != null && anterior != null) {
+      anterior.sgte = actual?.sgte;
+      return true;
+    }
+
+    return false;
   }
 
   Map(cb: MapType) {
