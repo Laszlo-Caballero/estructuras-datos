@@ -4,7 +4,7 @@ import Listas from "./Routes/Listas";
 
 function App() {
   return (
-    <main>
+    <main className="bg-monsoon-100 min-h-screen w-screen flex flex-col">
       <Header />
       <Routes>
         <Route path="/" element={<h1>Main</h1>} />
