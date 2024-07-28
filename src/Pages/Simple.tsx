@@ -15,15 +15,15 @@ export default function Simple() {
   const [inputValue2, setInputValue2] = useState<string>("");
 
   const code = `import { Nodo } from "./Nodo";
-type MapType = {
-  (date: string, index?: number): JSX.Element;
+type MapType<T, U> = {
+  (date: T, index?: number): U;
 };
 
-export class ListaSimple {
-  public inicio: Nodo | null;
+export class ListaSimple<T> {
+  public inicio: Nodo<T> | null;
   public cant: number = 0;
 
-  constructor(_inicio?: Nodo) {
+  constructor(_inicio?: Nodo<T>) {
     if (_inicio) {
       this.inicio = _inicio;
     } else {
@@ -31,7 +31,7 @@ export class ListaSimple {
     }
   }
 
-  AgregarInicio(nuevo: Nodo) {
+  AgregarInicio(nuevo: Nodo<T>) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -41,7 +41,7 @@ export class ListaSimple {
     this.cant++;
   }
 
-  AgregarFinal(nuevo: Nodo) {
+  AgregarFinal(nuevo: Nodo<T>) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -54,10 +54,32 @@ export class ListaSimple {
     this.cant++;
   }
 
-  Map(cb: MapType) {
+  EliminarNodo(dato: T) {
+    if (this.inicio?.dato == dato) {
+      this.inicio = this.inicio.sgte;
+      return true;
+    }
+
+    let anterior = this.inicio;
+    let actual = this.inicio?.sgte;
+
+    while (actual != null && actual.dato != dato) {
+      anterior = actual;
+      actual = actual.sgte;
+    }
+
+    if (actual != null && anterior != null) {
+      anterior.sgte = actual?.sgte;
+      return true;
+    }
+
+    return false;
+  }
+
+  Map<U>(cb: MapType<T, U>) {
     let inicio = this.inicio;
     let index = 0;
-    const Retorno: JSX.Element[] = [];
+    const Retorno: U[] = [];
     while (inicio != null) {
       Retorno.push(cb(inicio.dato, index));
       inicio = inicio.sgte;

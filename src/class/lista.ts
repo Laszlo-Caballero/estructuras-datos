@@ -1,6 +1,6 @@
 import { Nodo } from "./Nodo";
-type MapType<T> = {
-  (date: T, index?: number): JSX.Element;
+type MapType<T, U> = {
+  (date: T, index?: number): U;
 };
 
 export class ListaSimple<T> {
@@ -60,10 +60,10 @@ export class ListaSimple<T> {
     return false;
   }
 
-  Map(cb: MapType<T>) {
+  Map<U>(cb: MapType<T, U>) {
     let inicio = this.inicio;
     let index = 0;
-    const Retorno: JSX.Element[] = [];
+    const Retorno: U[] = [];
     while (inicio != null) {
       Retorno.push(cb(inicio.dato, index));
       inicio = inicio.sgte;
