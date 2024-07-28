@@ -6,7 +6,7 @@ import CNodo from "../components/Nodo";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const lista = new ListaSimple();
+const lista = new ListaSimple<string>();
 
 lista.AgregarInicio(new Nodo("1"));
 

@@ -1,13 +1,13 @@
 import { Nodo } from "./Nodo";
-type MapType = {
-  (date: string, index?: number): JSX.Element;
+type MapType<T> = {
+  (date: T, index?: number): JSX.Element;
 };
 
-export class ListaSimple {
-  public inicio: Nodo | null;
+export class ListaSimple<T> {
+  public inicio: Nodo<T> | null;
   public cant: number = 0;
 
-  constructor(_inicio?: Nodo) {
+  constructor(_inicio?: Nodo<T>) {
     if (_inicio) {
       this.inicio = _inicio;
     } else {
@@ -15,7 +15,7 @@ export class ListaSimple {
     }
   }
 
-  AgregarInicio(nuevo: Nodo) {
+  AgregarInicio(nuevo: Nodo<T>) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -25,7 +25,7 @@ export class ListaSimple {
     this.cant++;
   }
 
-  AgregarFinal(nuevo: Nodo) {
+  AgregarFinal(nuevo: Nodo<T>) {
     if (this.inicio == null) {
       this.inicio = nuevo;
     } else {
@@ -38,7 +38,7 @@ export class ListaSimple {
     this.cant++;
   }
 
-  EliminarNodo(dato: string) {
+  EliminarNodo(dato: T) {
     if (this.inicio?.dato == dato) {
       this.inicio = this.inicio.sgte;
       return true;
@@ -60,7 +60,7 @@ export class ListaSimple {
     return false;
   }
 
-  Map(cb: MapType) {
+  Map(cb: MapType<T>) {
     let inicio = this.inicio;
     let index = 0;
     const Retorno: JSX.Element[] = [];
